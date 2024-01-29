@@ -1,17 +1,20 @@
+import MoviesCarousel from '@/components/MoviesCarousel';
+import { getDiscoverMovies } from '@/lib/getMovies';
 import React from 'react'
 type Props={
   params:{
-    id:String;
+    id:string;
   },
   searchParams:{
-    genre:String;
+    genre:string;
   }
 }
 
-function GenrePage({ params: {id}, searchParams: { genre}}: Props) {
+async function GenrePage({ params: {id}, searchParams: { genre}}: Props) {
+  const movies= await getDiscoverMovies(id);
   return (
     <div>
-      The ID of {genre} is {id}
+      <MoviesCarousel title={`Genre`} movies={movies} isVertical/>
     </div>
   )
 }
